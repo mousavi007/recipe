@@ -35,7 +35,7 @@ public class recipeServiseImpTest {
         when(recipeServis.getRecipes()).thenReturn(recipesData);
 
         Set<Recipe> recipes=recipeServis.getRecipes();
-        assertEquals(recipes.size(),1);
+        assertEquals(recipes.size(),3);
         verify(recipeRepository,times(1)).findAll();
     }
 }
