@@ -37,6 +37,8 @@ public class RecipeControllerTest {
 
         MockitoAnnotations.initMocks(this);
         recipeController=new RecipeController(recipeServise);
+        mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
+
     }
 
     @Test
@@ -46,7 +48,7 @@ public class RecipeControllerTest {
         recipe.setId(11l);
         MockMvc mockMvc= MockMvcBuilders.standaloneSetup(recipeController).build();
         when(recipeServise.findById(anyLong())).thenReturn(recipe);
-        mockMvc.perform(get("/recipe/show/1"))
+        mockMvc.perform(get("/recipe/1/show"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/show"))
                 .andExpect(model().attributeExists("recipe"));
