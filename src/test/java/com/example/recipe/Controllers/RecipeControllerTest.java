@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -37,7 +38,9 @@ public class RecipeControllerTest {
         recipe.setId(11l);
         MockMvc mockMvc= MockMvcBuilders.standaloneSetup(recipeController).build();
         when(recipeServise.findById(anyLong())).thenReturn(recipe);
-        mockMvc.perform(get("/recipe/show/1")).andExpect(status().isOk())
-                .andExpect(view().name("recipe/show"));
+        mockMvc.perform(get("/recipe/show/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/show"))
+                .andExpect(model().attributeExists("recipe"));
     }
 }
