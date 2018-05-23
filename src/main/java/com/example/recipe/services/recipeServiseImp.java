@@ -1,6 +1,7 @@
 package com.example.recipe.services;
 
 import com.example.recipe.Domain.Recipe;
+import com.example.recipe.exceptions.NotFoundExceptions;
 import com.example.recipe.commands.RecipeCommand;
 import com.example.recipe.converters.RecipeCommandToRecipe;
 import com.example.recipe.converters.RecipeToRecipeCommand;
@@ -44,7 +45,7 @@ public class recipeServiseImp implements recipeServise {
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
 
         if (!recipeOptional.isPresent()) {
-            throw new RuntimeException("Recipe Not Found!");
+            throw new NotFoundExceptions("Recipe Not Found by ID: " + l.toString());
         }
 
         return recipeOptional.get();
