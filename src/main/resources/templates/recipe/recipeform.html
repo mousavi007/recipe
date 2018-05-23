@@ -64,10 +64,12 @@
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Difficulty:</label>
-                                    <select class="form-control">
-                                        <option>Easy</option>
-                                        <option>Medium</option>
-                                        <option>Hard</option>
+                                    <select class="form-control" th:field="*{difficulty}">
+                                        <!--/*@thymesVar id="difficultyValue" type="com.example.recipe.Domain.Difficulty"*/-->
+                                        <option th:each="difficultyValue : ${T(com.example.recipe.Domain.Difficulty).values()}"
+                                                th:value="${difficultyValue.name()}"
+                                                th:text="${difficultyValue.name()}">Easy</option>
+
                                     </select>
                                 </div>
                             </div>
@@ -104,6 +106,8 @@
                                     <ul>
                                         <li th:remove="all">1 Cup of milk</li>
                                         <li th:remove="all">1 Teaspoon of chocolate</li>
+                                        <!--/*@thymesVar id="recipe" type="com.example.recipe.Domain.Recipe"*/-->
+                                        <!--/*@thymesVar id="ingredient" type="com.example.recipe.Domain.Ingredients"*/-->
                                         <li th:each="ingredient : ${recipe.ingredients}"
                                             th:text="${(ingredient.getAmount() +
                                         ' ' + ingredient.unitOfMeasure.getDescription()  +
